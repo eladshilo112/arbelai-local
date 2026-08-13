@@ -12,9 +12,9 @@ systems unless the user explicitly requests or approves the relevant operation.
 The Improvement Watcher may retrieve official metadata after opt-in and does not
 send prompts, documents, file paths or unique hardware identifiers.
 
-Committers and reviewers: [repository contributors](https://github.com/eladshilo112/arbelai-local/graphs/contributors).
+Committers and reviewers: [repository contributors](../../graphs/contributors).
 
-Signing approver: [repository owner](https://github.com/eladshilo112).
+Signing approver: [repository owner](../../graphs/contributors).
 
 Privacy policy: [project privacy policy](docs/PRIVACY_POLICY_DRAFT.md).
 
