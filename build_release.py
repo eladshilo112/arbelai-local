@@ -3,7 +3,7 @@ import argparse,hashlib,json,re,shutil,subprocess,sys,zipfile
 from datetime import datetime,timezone
 from pathlib import Path
 ROOT=Path(__file__).resolve().parent
-EXCLUDE={".git","__pycache__",".arbelai-install","models","cache","logs","downloads","backups","benchmark_results","private_results"}
+EXCLUDE={".git",".github","__pycache__",".arbelai-install","models","cache","logs","downloads","backups","benchmark_results","private_results"}
 def digest(path):return hashlib.sha256(path.read_bytes()).hexdigest()
 def main():
     p=argparse.ArgumentParser();p.add_argument("--output",required=True);p.add_argument("--name",default="ARBELAI-Local-1.0.0-rc");a=p.parse_args();out=Path(a.output).resolve();stage=out/(a.name+"-folder")

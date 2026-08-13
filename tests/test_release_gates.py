@@ -5,6 +5,7 @@ class ReleaseGateTests(unittest.TestCase):
     def test_release_builder_excludes_git_metadata(self):
         text=(ROOT/"build_release.py").read_text(encoding="utf-8-sig")
         self.assertIn('".git"',text)
+        self.assertIn('".github"',text)
     def test_product_gate_rejects_removed_cli_spoof_flags(self):
         cp=subprocess.run([sys.executable,str(ROOT/"product_gate.py"),"--root",str(ROOT),"--code-signed"],capture_output=True,text=True);self.assertNotEqual(cp.returncode,0);self.assertIn("unrecognized arguments",cp.stderr)
     def test_zip_checksum_required_and_verified(self):
