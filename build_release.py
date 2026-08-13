@@ -5,14 +5,18 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parent
 EXCLUDE={".git",".github","__pycache__",".arbelai-install","models","cache","logs","downloads","backups","benchmark_results","private_results"}
 def digest(path):return hashlib.sha256(path.read_bytes()).hexdigest()
+def staged_sources(root,out):
+    out=out.resolve()
+    for source in root.rglob("*"):
+        rel=source.relative_to(root)
+        if source.resolve().is_relative_to(out) or any(part in EXCLUDE for part in rel.parts):continue
+        if source.is_file():yield source,rel
 def main():
     p=argparse.ArgumentParser();p.add_argument("--output",required=True);p.add_argument("--name",default="ARBELAI-Local-1.0.0-rc");a=p.parse_args();out=Path(a.output).resolve();stage=out/(a.name+"-folder")
     if not re.fullmatch(r"[A-Za-z0-9._-]+",a.name):raise SystemExit("Invalid release name")
     if stage.exists() or (out/(a.name+".zip")).exists():raise SystemExit("Release target exists. Choose a new output or remove it only after explicit approval.")
-    for source in ROOT.rglob("*"):
-        rel=source.relative_to(ROOT)
-        if any(part in EXCLUDE for part in rel.parts):continue
-        if source.is_file():dest=stage/rel;dest.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(source,dest)
+    for source,rel in staged_sources(ROOT,out):
+        dest=stage/rel;dest.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(source,dest)
     security=subprocess.run([sys.executable,str(stage/"release_gate.py"),"--root",str(stage)],capture_output=True,text=True,timeout=900)
     if security.returncode!=0:print(security.stdout);print(security.stderr,file=sys.stderr);return 1
     product=subprocess.run([sys.executable,str(stage/"product_gate.py"),"--root",str(stage)],capture_output=True,text=True)
