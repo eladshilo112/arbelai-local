@@ -2,7 +2,7 @@
 
 ## Roles
 
-* Maintainer and committer: repository owner.
+* Maintainer and committer: [repository owner](https://github.com/eladshilo112).
 * Reviewer: repository owner until additional maintainers are appointed.
 * Release and signing approver: repository owner.
 

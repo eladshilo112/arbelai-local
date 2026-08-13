@@ -34,6 +34,10 @@ Windows הוא היעד שנבדק בפועל. macOS ו־Linux נמצאים בר
 
 אין לפתוח Issue ציבורי עם חולשה שטרם תוקנה. הוראות דיווח נמצאות ב־`SECURITY.md`.
 
+## Code signing policy
+
+מדיניות החתימה ותהליך SignPath מתועדים ב־[`CODE_SIGNING_POLICY.md`](CODE_SIGNING_POLICY.md). עד לקבלת חתימה תקפה, Releases מסומנים במפורש כלא חתומים ואינם מתקינים עדכונים אוטומטית.
+
 </div>
 
 ## English
