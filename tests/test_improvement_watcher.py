@@ -10,11 +10,11 @@ class Response:
     def __enter__(self):return self
     def __exit__(self,*args):return False
 
-def make_root(folder,enabled=True,ram=32*1024**3,disk=100*1024**3):
+def make_root(folder,enabled=True,ram=32*1024**3,disk=100*1024**3,system_name=None,architecture="AMD64"):
     root=Path(folder);(root/"config").mkdir(parents=True)
     for name in ["IMPROVEMENT_WATCHER.json","REVOCATIONS.json","CVE_POLICY.json"]:(root/"config"/name).write_bytes((ROOT/"config"/name).read_bytes())
     config=json.loads((root/"config"/"IMPROVEMENT_WATCHER.json").read_text(encoding="utf-8-sig"));config["enabled"]=enabled;(root/"config"/"IMPROVEMENT_WATCHER.json").write_text(json.dumps(config))
-    sources={"version":1,"allowed_hosts":["api.github.com","api.osv.dev","github.com"],"sources":[{"id":"openvino","kind":"runtime","publisher":"Intel","official":True,"channel":"stable","metadata_type":"github_release","metadata_url":"https://api.github.com/repos/openvinotoolkit/openvino/releases/latest","project_url":"https://github.com/openvinotoolkit/openvino","license":"Apache-2.0","os":["Windows"],"architectures":["AMD64"],"hardware_tags":["cpu"]}]};(root/"config"/"IMPROVEMENT_SOURCES.json").write_text(json.dumps(sources));(root/"config"/"MACHINE_PROFILE.json").write_text(json.dumps({"ram":{"total_bytes":ram},"storage":{"free_bytes":disk}}));(root/"config"/"WORKLOAD_PROFILE.json").write_text(json.dumps({"priorities":["extraction"]}));return root
+    sources={"version":1,"allowed_hosts":["api.github.com","api.osv.dev","github.com"],"sources":[{"id":"openvino","kind":"runtime","publisher":"Intel","official":True,"channel":"stable","metadata_type":"github_release","metadata_url":"https://api.github.com/repos/openvinotoolkit/openvino/releases/latest","project_url":"https://github.com/openvinotoolkit/openvino","license":"Apache-2.0","os":["Windows"],"architectures":["AMD64"],"hardware_tags":["cpu"]}]};(root/"config"/"IMPROVEMENT_SOURCES.json").write_text(json.dumps(sources));profile={"ram":{"total_bytes":ram},"storage":{"free_bytes":disk}};profile["os"]={"name":system_name,"architecture":architecture} if system_name else {}; (root/"config"/"MACHINE_PROFILE.json").write_text(json.dumps(profile));(root/"config"/"WORKLOAD_PROFILE.json").write_text(json.dumps({"priorities":["extraction"]}));return root
 
 class WatcherTests(unittest.TestCase):
     def release(self,digest=None,size=1024,license_unused=None):return {"tag_name":"2026.1.0","published_at":"2026-08-14T00:00:00Z","assets":[{"name":"runtime.zip","browser_download_url":"https://github.com/runtime.zip","size":size,"digest":"sha256:"+digest if digest else None}]}
@@ -97,6 +97,6 @@ class WatcherTests(unittest.TestCase):
             watcher=wmod.Watcher(make_root(d),opener=opener);watcher.discover();candidate=watcher.discover()["candidates"][0];self.assertTrue(candidate["cooldown"]["active"]);self.assertGreater(candidate["cooldown"]["remaining_days"],0)
     def test_darwin_asset_is_never_classified_as_windows(self):
         with tempfile.TemporaryDirectory() as d:
-            watcher=wmod.Watcher(make_root(d));record={"assets":[{"name":"ollama-darwin.zip"},{"name":"ollama-windows-amd64.zip"},{"name":"portable.gguf"}]};names=[x["name"] for x in watcher.compatible_assets(record)];self.assertNotIn("ollama-darwin.zip",names);self.assertIn("ollama-windows-amd64.zip",names);self.assertIn("portable.gguf",names)
+            watcher=wmod.Watcher(make_root(d,system_name="Windows"));record={"assets":[{"name":"ollama-darwin.zip"},{"name":"ollama-windows-amd64.zip"},{"name":"portable.gguf"}]};names=[x["name"] for x in watcher.compatible_assets(record)];self.assertNotIn("ollama-darwin.zip",names);self.assertIn("ollama-windows-amd64.zip",names);self.assertIn("portable.gguf",names)
 
 if __name__=="__main__":unittest.main(verbosity=2)

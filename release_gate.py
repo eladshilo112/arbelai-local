@@ -71,5 +71,5 @@ def main():
         with zipfile.ZipFile(zip_path) as z:names=z.namelist();bad=[n for n in names if any(part in FORBIDDEN_PARTS for part in Path(n).parts) or Path(n).suffix.lower() in {".gguf",".log",".pyc"}]
         checks.append({"name":"zip_clean","ok":not bad,"detail":bad})
     blockers=[x for x in findings if x["severity"] in {"critical","high"}];passed=not blockers and all(x["ok"] for x in checks);report={"status":"passed" if passed else "blocked","claim":"לא נמצאו חולשות קריטיות או גבוהות בבדיקות שבוצעו" if passed else "השחרור חסום בשל ממצא או בדיקה שנכשלה","known_open_critical_high":len(blockers),"findings":findings,"checks":checks,"defender":defender}
-    out=root/"SECURITY_TEST_REPORT.json";out.write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding="utf-8-sig");print(json.dumps(report,ensure_ascii=False,indent=2));return 0 if passed else 1
+    out=root/"SECURITY_TEST_REPORT.json";out.write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding="utf-8-sig");print(json.dumps(report,ensure_ascii=True,indent=2));return 0 if passed else 1
 if __name__=="__main__":raise SystemExit(main())

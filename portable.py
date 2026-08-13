@@ -68,6 +68,7 @@ def atomic_json(path: Path, value) -> None:
 
 class Installer:
     def __init__(self, target: Path, dry_run=False, non_interactive=False, approvals=None, config_home=None, offline=False):
+        self.target_lexical = Path(os.path.abspath(target))
         self.target = target.resolve()
         self.dry_run = dry_run
         self.non_interactive = non_interactive
@@ -129,9 +130,21 @@ class Installer:
         return entry
 
     def write(self, path: Path, content: bytes):
-        for parent in [path, *path.parents]:
-            if parent.exists() and parent.is_symlink():
-                raise RuntimeError(f"Refusing write through symbolic link or junction candidate: {parent}")
+        lexical = Path(os.path.abspath(path))
+        try:
+            relative = lexical.relative_to(self.target_lexical)
+            cursor = self.target_lexical
+        except ValueError:
+            resolved = path.resolve(strict=False)
+            try:
+                relative = resolved.relative_to(self.target)
+                cursor = self.target
+            except ValueError as exc:
+                raise RuntimeError(f"Refusing write outside installation target: {path}") from exc
+        for part in relative.parts:
+            cursor = cursor / part
+            if cursor.exists() and cursor.is_symlink():
+                raise RuntimeError(f"Refusing write through symbolic link or junction candidate: {cursor}")
         if path.exists() and path.read_bytes() == content:
             self.record("unchanged", path=str(path))
             return False
