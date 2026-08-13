@@ -1,0 +1,7 @@
+{
+  "default_mode": "local_only",
+  "telemetry": {"enabled": false, "endpoint": null, "fields": []},
+  "cloud_release": "explicit_route_only_after_privacy_gate",
+  "restricted_output": "local_file_only",
+  "retention_days": {"operational_logs": 30, "resource_ledger": 90, "private_results": 7}
+}

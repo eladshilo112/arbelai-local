@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "tasks": [
+    {"id":"he_extract","category":"extraction","language":"he","prompt":"החזר JSON בלבד עם השדות city, rooms, price מתוך: דירת 4 חדרים בחיפה במחיר 2,450,000 ש״ח.","scoring":{"type":"json","expected":{"city":"חיפה","rooms":4,"price":2450000}}},
+    {"id":"en_extract","category":"extraction","language":"en","prompt":"Return JSON only with keys city, rooms, price from: A 3 room apartment in London costs 750000.","scoring":{"type":"json","expected":{"city":"London","rooms":3,"price":750000}}},
+    {"id":"he_classify","category":"classification","language":"he","prompt":"סווג למילה אחת בלבד: בקשה לבדוק סעיף ביטול בחוזה רכישה.","scoring":{"type":"exact","value":"חוזה"}},
+    {"id":"en_classify","category":"classification","language":"en","prompt":"Classify with one word only: calculate the net present value of a loan.","scoring":{"type":"exact","value":"finance"}},
+    {"id":"he_contradiction","category":"contradiction","language":"he","prompt":"ענה כן או לא בלבד. טענה א: המסירה ביוני. טענה ב: המסירה באוגוסט. האם יש סתירה?","scoring":{"type":"exact","value":"כן"}},
+    {"id":"en_contradiction","category":"contradiction","language":"en","prompt":"Answer yes or no only. A says delivery is June. B says delivery is August. Is there a contradiction?","scoring":{"type":"exact","value":"yes"}},
+    {"id":"he_instruction","category":"instruction_following","language":"he","prompt":"החזר בדיוק את המחרוזת ARBELAI_OK בלי שום טקסט נוסף.","scoring":{"type":"exact","value":"ARBELAI_OK"}},
+    {"id":"en_hallucination","category":"hallucination_resistance","language":"en","prompt":"The record contains no tax rate. State only UNKNOWN.","scoring":{"type":"exact","value":"UNKNOWN"}},
+    {"id":"he_context","category":"context_utilization","language":"he","prompt":"התעלם מכל ידע חיצוני. קוד האישור היחיד הוא ARBEL-7429-X. החזר את הקוד בלבד.","scoring":{"type":"exact","value":"ARBEL-7429-X"}},
+    {"id":"en_code","category":"coding","language":"en","prompt":"Return only valid Python defining function add(a,b) that returns their sum.","scoring":{"type":"python_ast","function":"add"}}
+  ]
+}

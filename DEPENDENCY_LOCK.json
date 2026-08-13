@@ -1,0 +1,8 @@
+{
+  "version": 1,
+  "bundled_python_packages": [],
+  "bundled_binaries": [],
+  "bundled_models": [],
+  "runtime_requirement": {"python": ">=3.10", "source": "system or official installer"},
+  "target_download_policy": "Every approved target download is pinned by version, official source and SHA256 in the target install manifest."
+}

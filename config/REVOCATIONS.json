@@ -1,0 +1,5 @@
+{
+  "version": 1,
+  "revoked": [],
+  "rule": "A revoked component or version cannot be downloaded, promoted or restored as Last Known Good."
+}

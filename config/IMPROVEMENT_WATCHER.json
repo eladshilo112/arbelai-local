@@ -1,0 +1,20 @@
+{
+  "enabled": false,
+  "requires_explicit_opt_in": true,
+  "schedule": "weekly",
+  "channel": "stable",
+  "metadata_only": true,
+  "automatic_download": false,
+  "automatic_install": false,
+  "automatic_driver_change": false,
+  "cooldown_days": 14,
+  "minimum_system_headroom_percent": 25,
+  "minimum_quality_delta": 0.0,
+  "minimum_speed_improvement_percent": 5,
+  "maximum_ram_increase_percent": 10,
+  "downgrade_protection": true,
+  "canary_required": true,
+  "regression_benchmark_required": true,
+  "user_approval_for_promotion": true,
+  "candidate_states": ["discovered", "rejected", "awaiting_user_approval", "canary_downloaded", "security_passed", "benchmark_passed", "promoted", "rolled_back", "revoked"]
+}
