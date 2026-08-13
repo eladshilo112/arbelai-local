@@ -18,7 +18,7 @@ def main():
     product=subprocess.run([sys.executable,str(stage/"product_gate.py"),"--root",str(stage)],capture_output=True,text=True)
     files=[]
     for path in sorted(x for x in stage.rglob("*") if x.is_file() and "__pycache__" not in x.parts):files.append({"path":path.relative_to(stage).as_posix(),"size":path.stat().st_size,"sha256":digest(path)})
-    manifest={"name":"ARBELAI Local","version":"1.0.0","channel":"release_candidate","created_at":datetime.now(timezone.utc).isoformat(),"code_signing":False,"large_models_bundled":False,"telemetry_default":False,"files":files}
+    version=(ROOT/"VERSION").read_text(encoding="utf-8-sig").strip();manifest={"name":"ARBELAI Local","version":version,"channel":"release_candidate","created_at":datetime.now(timezone.utc).isoformat(),"code_signing":False,"large_models_bundled":False,"telemetry_default":False,"files":files}
     (stage/"RELEASE_MANIFEST.json").write_text(json.dumps(manifest,ensure_ascii=False,indent=2),encoding="utf-8-sig")
     archive=out/(a.name+".zip");out.mkdir(parents=True,exist_ok=True)
     with zipfile.ZipFile(archive,"w",zipfile.ZIP_DEFLATED,compresslevel=9) as z:

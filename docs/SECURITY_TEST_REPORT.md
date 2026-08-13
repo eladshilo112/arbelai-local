@@ -8,7 +8,7 @@
 
 ## בדיקות שעברו
 
-עברו קומפילציית Python ו־48 בדיקות Unit, Integration ו־Failure Injection. נוספו Online Metadata מדומה, Deduplication ו־Cooldown, Source Timeout, Rate Limit, Metadata זדוני, CVE Unknown, License Unknown, Low RAM, Low Disk, Hash ו־Size Mismatch, Partial Download, ארכיון זדוני, Symlink בתוך ארכיון, מניעת Downgrade, Benchmark שעובר ו־Regression שנחסם, Promotion, Rollback, Revocation ו־Schedule Idempotency. יתר בדיקות הפרטיות, MCP, Zip Slip, Resume, Config Conflict ו־Dependency Lock נשמרו.
+עברו קומפילציית Python ו־49 בדיקות Unit, Integration ו־Failure Injection. נוספו Online Metadata מדומה, Deduplication ו־Cooldown, Source Timeout, Rate Limit, Metadata זדוני, CVE Unknown, License Unknown, Low RAM, Low Disk, Hash ו־Size Mismatch, Partial Download, ארכיון זדוני, Symlink בתוך ארכיון, מניעת Downgrade, Benchmark שעובר ו־Regression שנחסם, Promotion, Rollback, Revocation ו־Schedule Idempotency. יתר בדיקות הפרטיות, MCP, Zip Slip, Resume, Config Conflict ו־Dependency Lock נשמרו.
 
 Windows Defender היה פעיל עם Real Time Protection וחתימות גרסה 1.457.130.0, והסריקה המותאמת הסתיימה בהצלחה. Static Analysis לא מצא Shell Execution מסוכן. חבילת המקור מבוססת Python Standard Library בלבד ואינה כוללת בינארים, מודלים או חבילות Python צד שלישי.
 

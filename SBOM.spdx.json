@@ -3,10 +3,10 @@
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
   "name": "ARBELAI-Local-1.0.0",
-  "documentNamespace": "https://arbelai.local/spdx/open-source/1.0.0-rc6",
+  "documentNamespace": "https://arbelai.local/spdx/open-source/1.0.0-rc6.1",
   "creationInfo": {"created": "2026-08-13T00:00:00Z", "creators": ["Tool: Codex"]},
   "packages": [
-    {"name":"ARBELAI Local","SPDXID":"SPDXRef-Package-ARBELAI","versionInfo":"1.0.0-rc6","downloadLocation":"NOASSERTION","filesAnalyzed":true,"licenseConcluded":"Apache-2.0","licenseDeclared":"Apache-2.0","copyrightText":"Copyright 2026 ARBELAI Local contributors"}
+    {"name":"ARBELAI Local","SPDXID":"SPDXRef-Package-ARBELAI","versionInfo":"1.0.0-rc6.1","downloadLocation":"NOASSERTION","filesAnalyzed":true,"licenseConcluded":"Apache-2.0","licenseDeclared":"Apache-2.0","copyrightText":"Copyright 2026 ARBELAI Local contributors"}
   ],
   "annotations": [{"annotationType":"OTHER","annotator":"Tool: Codex","annotationDate":"2026-08-14T00:00:00Z","comment":"RC6 uses Python standard library only. No third party binary, runtime, Python package or model is bundled. Source registry entries are metadata definitions, not bundled dependencies. Target downloads are recorded in the target manifest."}]
 }
