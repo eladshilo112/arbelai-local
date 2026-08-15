@@ -1,47 +1,122 @@
-<div dir="rtl" style="font-family: David; text-align: right;">
+# ARBELAI Reflex
 
-# ARBELAI Local
+> שכבת Reflex פתוחה, מקומית ומבוססת ראיות לשיפור משימות AI בלי Proxy, בלי שירות רקע ובלי שינוי הגדרות גלובליות.
 
-ARBELAI Local הוא מתקין ומנוע ניתוב מקומי, מאובטח ורב־מערכתי לעומסי AI. הוא מגלה את החומרה ואת צורכי המשתמש לפני בחירת Runtime או מודל, בודק התאמת זיכרון, מבצע Benchmark בעברית ובאנגלית, ומחבר כלים תואמי MCP דרך stdio כאשר המשתמש מאשר זאת.
+[English summary](#english-summary)
 
-## עקרונות
+## למה הפרויקט קיים
 
-* Local First וללא Telemetry כברירת מחדל.
-* אין מודלים גדולים, Runtime או Secrets במאגר או בחבילת Release.
-* אין הורדה, חיבור כלי, שינוי תצורה או קידום Canary ללא אישור מפורש.
-* אין פתיחת פורט חיצוני, שינוי Firewall, Driver או BIOS.
-* מקור רשמי, רישיון, גרסה, גודל ו־SHA256 נבדקים לפני הורדה.
-* CVE או רישיון במצב Unknown חוסמים קידום.
+מערכות תזמור AI רבות מוסיפות Router, Proxy, מספר מודלים ושירותי רקע לכל בקשה. לעיתים עלות התזמור גבוהה מהחיסכון, והמערכת הופכת לנקודת כשל שמשפיעה על לקוחות רשמיים.
 
-## הפעלה ב־Windows
-
-הורידו את קובץ ה־ZIP מעמוד Releases, אמתו SHA256, חלצו ולחצו פעמיים על `הפעלת ARBELAI.cmd`.
-
-## בדיקה למפתחים
+ARBELAI Reflex פועל לפי עיקרון הפוך:
 
 ```text
-python -m unittest discover -s tests -v
-python release_gate.py --root .
+Evidence Before Intervention
+Tools Before Models
+One Executor By Default
+Every Result Carries Evidence
 ```
 
-Windows הוא היעד שנבדק בפועל. macOS ו־Linux נמצאים ברמת Designed עם בדיקות תחביר ומבנה, עד להרצת בדיקות יעד אמיתיות.
+ברירת המחדל היא `BYPASS`. המערכת מתערבת רק כאשר קיימת הצדקה מפורשת או Benefit Certificate תקף.
 
-## רישיון ופרטיות
+## מצב גרסה 0.1
 
-הקוד מופץ ברישיון Apache 2.0. מדיניות הפרטיות נמצאת ב־`docs/PRIVACY_POLICY_DRAFT.md`. המוצר אינו שולח תוכן משתמש או מזהה חומרה ייחודי לצורך Telemetry.
+גרסה זו היא Reference Kernel בטוח ומוגבל. היא כוללת:
 
-## אבטחה
+1. Intent Contract עם Hash לבקשה המקורית.
 
-אין לפתוח Issue ציבורי עם חולשה שטרם תוקנה. הוראות דיווח נמצאות ב־`SECURITY.md`.
+2. Policy Decision דטרמיניסטי.
 
-## Code signing policy
+3. Context Manifest מוגבל בתקציב ומסומן לפי מקור.
 
-מדיניות החתימה ותהליך SignPath מתועדים ב־[`CODE_SIGNING_POLICY.md`](CODE_SIGNING_POLICY.md). עד לקבלת חתימה תקפה, Releases מסומנים במפורש כלא חתומים ואינם מתקינים עדכונים אוטומטית.
+4. Capability Grant זמני וללא רשת.
 
-</div>
+5. SQLite Ledger עם שרשרת Hash.
 
-## English
+6. Evidence Receipt לכל הכנה.
 
-ARBELAI Local is a privacy-first, cross-platform installer and routing engine for local AI workloads. It discovers hardware and workload requirements before selecting any runtime or model, performs memory-fit checks and bilingual benchmarks, and connects compatible tools through MCP stdio only after explicit approval.
+7. CLI במצב Observe או Advisor.
 
-The code is licensed under Apache License 2.0. Windows is verified. macOS and Linux are currently designed and syntax-tested, not claimed as verified.
+8. בדיקות להגנת Secrets, Path Traversal, הרשאות ותקציב Context.
+
+הגרסה אינה מפעילה מודלים, אינה מתקשרת לספק ענן ואינה משנה את Codex, Claude או ChatGPT.
+
+## דרישות
+
+Node.js 24 ומעלה. אין חבילות צד שלישי ואין צורך ב `npm install`.
+
+## התחלה
+
+```powershell
+node .\bin\arbel.js init C:\path\to\project
+node .\bin\arbel.js prepare --workspace C:\path\to\project --task "בדוק את הפרויקט"
+node .\bin\arbel.js status --workspace C:\path\to\project
+node .\bin\arbel.js doctor --workspace C:\path\to\project
+```
+
+ברירת המחדל היא `observe-local`. במצב זה נאסף Metadata בלבד, ללא תוכן קבצים.
+
+כדי לאפשר Context ממוקד יש לשנות במפורש את `mode` בקובץ `.arbel/policy.json` ל `advisor`, ולאחר מכן:
+
+```powershell
+node .\bin\arbel.js prepare --workspace C:\path\to\project --task "אתר את קוד האימות" --include-content
+```
+
+גם במצב זה ARBELAI אינו מבצע שינוי.
+
+## התחייבויות אי התערבות
+
+ה Kernel אינו:
+
+1. משנה `OPENAI_BASE_URL`.
+
+2. משנה Proxy של מערכת ההפעלה.
+
+3. פותח Port.
+
+4. מתקין Service או Scheduled Task.
+
+5. משנה Registry, Firewall או Hosts.
+
+6. יורש או שומר Secrets לצורך Ledger.
+
+7. שולח Telemetry.
+
+8. מוריד מודלים או Runtimes.
+
+9. משנה קובצי Codex או Claude.
+
+## ארכיטקטורה
+
+```text
+User or Agent
+      ↓
+Intent Contract
+      ↓
+Policy Kernel
+      ↓
+Context Compiler
+      ↓
+Executor Adapter, future and opt in
+      ↓
+Verifier
+      ↓
+Evidence Receipt
+```
+
+ראו [ARCHITECTURE.md](ARCHITECTURE.md), [THREAT_MODEL.md](THREAT_MODEL.md) ו [PRIVACY.md](PRIVACY.md).
+
+## בדיקות
+
+```powershell
+cmd /c npm test
+cmd /c npm run check
+```
+
+## רישיון
+
+הקוד וה Schemas מופצים תחת Apache License 2.0. תרומות מתקבלות באמצעות DCO.
+
+## English summary
+
+ARBELAI Reflex is an evidence first, opt in task preparation kernel for AI coding and knowledge workflows. It does not proxy provider traffic, open ports, run a daemon, modify global configuration, call a model, or send telemetry. Version 0.1 implements typed task contracts, deterministic policy decisions, bounded context manifests, a privacy preserving hash chained ledger, and evidence receipts using only Node.js built in modules.

@@ -1,6 +1,5 @@
-# Code of Conduct
+# קוד התנהגות
 
-Be respectful, constructive and focused on evidence. Harassment, discrimination,
-threats, publication of private information and unsafe disclosure of security
-issues are not accepted. Maintainers may remove content or restrict participation
-when needed to protect contributors and users.
+הקהילה מתחייבת לשיח מקצועי, מכבד, בטוח ומכיל. אין מקום להטרדה, אפליה, חשיפת מידע אישי או שימוש בפרויקט לפגיעה באחרים.
+
+מחלוקת טכנית נפתרת באמצעות ראיות, Tests, Benchmark ודיון מתועד. דיווחים רגישים בתחום האבטחה אינם מתפרסמים בפומבי לפני תיקון מתואם.

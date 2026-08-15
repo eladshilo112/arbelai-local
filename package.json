@@ -1,0 +1,51 @@
+{
+  "name": "@arbelai/reflex",
+  "version": "0.1.0",
+  "description": "Evidence-first, opt-in AI task orchestration without proxies or global configuration changes.",
+  "type": "module",
+  "bin": {
+    "arbel": "./bin/arbel.js"
+  },
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "test": "node --test",
+    "test:coverage": "node --test --experimental-test-coverage",
+    "check": "node --check bin/arbel.js && node --check src/cli.js && node --check src/kernel.js",
+    "verify": "npm run check && npm test"
+  },
+  "keywords": [
+    "ai",
+    "orchestration",
+    "codex",
+    "mcp",
+    "local-first",
+    "privacy",
+    "token-efficiency"
+  ],
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eladshilo112/arbelai-local.git"
+  },
+  "homepage": "https://github.com/eladshilo112/arbelai-local/tree/reflex-v0.1",
+  "files": [
+    "bin",
+    "src",
+    "schemas",
+    "README.md",
+    "README.he.md",
+    "ARCHITECTURE.md",
+    "PROTOCOL.md",
+    "THREAT_MODEL.md",
+    "PRIVACY.md",
+    "SECURITY.md",
+    "MIGRATION.md",
+    "ROLLBACK.md",
+    "UNINSTALL.md",
+    "CHANGELOG.md",
+    "NOTICE",
+    "LICENSE"
+  ]
+}

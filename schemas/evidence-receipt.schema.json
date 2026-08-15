@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arbelai.org/schemas/evidence-receipt.schema.json",
+  "title": "ARBELAI Evidence Receipt",
+  "type": "object",
+  "required": [
+    "protocol_version",
+    "task_id",
+    "action",
+    "intent_hash",
+    "policy_decision_hash",
+    "context_manifest_hash",
+    "usage",
+    "verification",
+    "result",
+    "receipt_hash"
+  ],
+  "properties": {
+    "protocol_version": { "const": "0.1.0" },
+    "task_id": { "type": "string" },
+    "action": { "enum": ["BYPASS", "OBSERVE", "PREPARE", "BLOCK"] },
+    "intent_hash": { "type": "string" },
+    "policy_decision_hash": { "type": "string" },
+    "context_manifest_hash": { "type": "string" },
+    "executor": { "type": ["string", "null"] },
+    "usage": { "type": "object" },
+    "verification": { "type": "array", "items": { "type": "string" } },
+    "result": { "enum": ["prepared", "blocked", "accepted", "rejected"] },
+    "receipt_hash": { "type": "string" }
+  }
+}
