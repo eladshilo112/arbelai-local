@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arbelai.org/schemas/benefit-certificate.schema.json",
+  "title": "ARBELAI Benefit Certificate",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["task_class", "executor_profile", "hardware_fingerprint", "quality_lower_bound", "required_quality", "sample_count", "expires_at"],
+  "properties": {
+    "task_class": { "type": "string", "minLength": 1 },
+    "executor_profile": { "type": "string", "minLength": 1 },
+    "hardware_fingerprint": { "type": "string", "minLength": 1 },
+    "quality_lower_bound": { "type": "number", "minimum": 0, "maximum": 1 },
+    "required_quality": { "type": "number", "minimum": 0, "maximum": 1 },
+    "p95_latency_ms": { "type": "number", "minimum": 0 },
+    "peak_ram_mb": { "type": "number", "minimum": 0 },
+    "peak_vram_mb": { "type": "number", "minimum": 0 },
+    "cloud_token_reduction": { "type": "number", "minimum": 0, "maximum": 1 },
+    "sample_count": { "type": "integer", "minimum": 1 },
+    "expires_at": { "type": "string", "format": "date-time" }
+  }
+}

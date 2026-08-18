@@ -1,11 +1,15 @@
-# Governance
+# ממשל הפרויקט
 
-## Roles
+1. שינויים בפרוטוקול עוברים RFC ציבורי.
 
-* Maintainer and committer: [repository owner and contributors](../../graphs/contributors).
-* Reviewer: repository owner until additional maintainers are appointed.
-* Release and signing approver: repository owner.
+2. שינויי Policy, Release ו Installer דורשים שני Reviews.
 
-Security-sensitive changes require passing tests, static analysis, clean-release
-scanning and manual review. No model output is treated as authoritative without
-verification against code, tests, the threat model and benchmark evidence.
+3. החלטות ארכיטקטורה נשמרות כ ADR.
+
+4. API ציבורי פועל לפי Semantic Versioning.
+
+5. תרומות נחתמות באמצעות DCO.
+
+6. דיווח חולשות מתבצע באופן פרטי.
+
+7. אין Marketplace או Plugin אוטומטי ללא Threat Model נפרד.

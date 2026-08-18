@@ -1,7 +1,0 @@
-{
-  "primary_language": "he",
-  "secondary_language": "en",
-  "priorities": ["extraction", "summarization", "structured_output", "retrieval", "coding"],
-  "critical_tasks": ["pricing", "contract", "finance", "external_publication", "executive_document", "client_data"],
-  "context_roots": []
-}

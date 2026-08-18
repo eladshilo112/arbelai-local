@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arbelai.org/schemas/policy-decision.schema.json",
+  "title": "ARBELAI Policy Decision",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["protocol_version", "policy_version", "mode", "risk", "privacy", "permitted", "reasons", "decision_hash"],
+  "properties": {
+    "protocol_version": { "const": "0.1.0" },
+    "policy_version": { "type": "string" },
+    "mode": { "enum": ["off", "observe-local", "advisor", "managed-read", "managed-write"] },
+    "risk": { "enum": ["low", "medium", "elevated"] },
+    "privacy": { "enum": ["project_private", "possible_secret"] },
+    "permitted": { "type": "boolean" },
+    "reasons": { "type": "array", "items": { "type": "string" } },
+    "network": { "type": "string" },
+    "allowed_providers": { "type": "array", "items": { "type": "string" } },
+    "max_context_tokens": { "type": "integer", "minimum": 0 },
+    "max_scan_files": { "type": "integer", "minimum": 1 },
+    "max_scan_bytes": { "type": "integer", "minimum": 1024 },
+    "max_file_bytes": { "type": "integer", "minimum": 0 },
+    "max_retries": { "type": "integer", "minimum": 0, "maximum": 2 },
+    "decision_hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+  }
+}

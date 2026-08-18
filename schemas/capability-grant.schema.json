@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arbelai.org/schemas/capability-grant.schema.json",
+  "title": "ARBELAI Capability Grant",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["protocol_version", "policy_decision_hash", "operation", "target", "expected_before_hash", "max_bytes", "network", "issued_at", "expires_at", "grant_hash"],
+  "properties": {
+    "protocol_version": { "const": "0.1.0" },
+    "policy_decision_hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "operation": { "type": "string", "minLength": 1 },
+    "target": { "type": "string", "minLength": 1 },
+    "expected_before_hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "max_bytes": { "type": "integer", "minimum": 0 },
+    "network": { "const": false },
+    "issued_at": { "type": "string", "format": "date-time" },
+    "expires_at": { "type": "string", "format": "date-time" },
+    "grant_hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+  }
+}
