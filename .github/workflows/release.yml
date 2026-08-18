@@ -24,7 +24,7 @@ jobs:
       - run: npm pack
       - run: sha256sum *.tgz > SHA256SUMS
       - run: npm sbom --sbom-format cyclonedx > sbom.cdx.json
-      - uses: actions/attest-build-provenance@v3
+      - uses: actions/attest-build-provenance@v4
         with:
           subject-path: "*.tgz"
       - uses: actions/upload-artifact@v4
